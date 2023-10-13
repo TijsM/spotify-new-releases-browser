@@ -1,5 +1,5 @@
 <script>
-  const SPOTIFY_CLIENT_ID = "4b712dd1511c4e6381691f9f9a994254";
+  const SPOTIFY_CLIENT_ID = "c23335b23bd44435a5843f4a6353f8c6";
   const authorize_link = `https://accounts.spotify.com/authorize?client_id=${SPOTIFY_CLIENT_ID}&response_type=token&redirect_uri=${window.location.href}&scope=user-top-read%20user-read-private%20user-read-email%20user-library-read%20user-follow-read`;
 
   const params = new URLSearchParams(window.location.href);
