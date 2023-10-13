@@ -55,6 +55,7 @@
   };
 
   let isDiscconnected = false;
+  
 
   onMount(() => {
     scrollFullPage();
