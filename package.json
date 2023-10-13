@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "sirv-cli": "^1.0.0",
+    "spotify-types": "^1.0.7",
     "svelte-rough-notation": "^0.1.4"
   }
 }

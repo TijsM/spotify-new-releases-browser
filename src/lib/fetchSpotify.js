@@ -38,6 +38,13 @@ export const getAlbumsFromArtist = async (artistId) => {
 
   return await artistData.json();
 };
+export const getAlbumsFromArtists = async (artistIds) => {
+  return Promise.all(
+    artistIds.map((artistId) => {
+      return getAlbumsFromArtist(artistId);
+    })
+  );
+};
 
 export const getFavoriteArtists = async (
   limit = 30,
@@ -57,7 +64,6 @@ export const getFavoriteArtists = async (
 export const getAlbumsFromGenre = async (genres, artists) => {
   const genresString = encodeURI(genres.join(","));
   const artistsString = encodeURI(artists.join(","));
-
 
   const albumsOnGenre = await fetch(
     `https://api.spotify.com/v1/recommendations/?seed_genres=${genresString}&seed_artists=${artistsString}`,

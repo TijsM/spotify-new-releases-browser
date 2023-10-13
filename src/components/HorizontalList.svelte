@@ -50,7 +50,9 @@
     {#each albums as album}
       <Album albumData={album} />
     {/each}
-    <LoadMore {loadMore} />
+   {#if loadMore}
+   <LoadMore {loadMore} />
+   {/if}
   {:else}
     {#each Array(AMOUNT_OF_ALBUMS_TO_FETCH) as unused}
       <LoadAlbum />
