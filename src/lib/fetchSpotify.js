@@ -38,6 +38,7 @@ export const getAlbumsFromArtist = async (artistId) => {
 
   return await artistData.json();
 };
+
 export const getAlbumsFromArtists = async (artistIds) => {
   return Promise.all(
     artistIds.map((artistId) => {
@@ -59,6 +60,39 @@ export const getFavoriteArtists = async (
     }
   );
   return await favArtists.json();
+};
+
+export const getUserFavoriteArtists = async (limit = 50) => {
+  let allFavArtists = [];
+  let after = null;
+
+  do {
+    const url = `https://api.spotify.com/v1/me/following?type=artist&limit=50${
+      after ? `&after=${after}` : ""
+    }`;
+
+    const favArtistsResponse = await fetch(url, {
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    });
+
+    if (!favArtistsResponse.ok) {
+      throw new Error("Failed to fetch favorite artists.");
+    }
+
+    const favArtistsData = await favArtistsResponse.json();
+    const artists = favArtistsData.artists.items;
+
+    if (artists.length === 0) {
+      break; // No more artists to fetch
+    }
+
+    allFavArtists = [...allFavArtists, ...artists];
+    after = favArtistsData.artists.cursors.after;
+  } while (after);
+
+  return allFavArtists;
 };
 
 export const getAlbumsFromGenre = async (genres, artists) => {
@@ -110,4 +144,43 @@ export const getAlbumsFromUser = async () => {
   } else {
     return albums;
   }
+};
+
+export const getAlbumsDetailsOf20Albums = async (ids) => {
+  if (ids.length > 20) {
+    throw new Error("Maximum allowed album IDs is 20.");
+  }
+
+  // Convert array of IDs to a comma-separated string
+  const encodedIds = ids.join(",");
+
+  const albumsDetails = await fetch(
+    `https://api.spotify.com/v1/albums/?ids=${encodedIds}`,
+    {
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    }
+  );
+
+  return await albumsDetails.json();
+};
+
+export const getAlbumsDetails = async (ids) => {
+  const chunks = splitIdsIntoSubarrays(ids, 20);
+  const albums = await Promise.all(
+    chunks.map((chunk) => getAlbumsDetailsOf20Albums(chunk))
+  );
+
+  return albums.flatMap((a) => a.albums);
+};
+
+const splitIdsIntoSubarrays = (ids, subArrayLenth) => {
+  const result = [];
+
+  for (let i = 0; i < ids.length; i += subArrayLenth) {
+    result.push(ids.slice(i, i + subArrayLenth));
+  }
+
+  return result;
 };
