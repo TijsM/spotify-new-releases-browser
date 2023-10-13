@@ -24,7 +24,7 @@
       const dateB = new Date(b.release_date);
 
       // Compare release dates
-      if (dateA >dateB) return -1;
+      if (dateA > dateB) return -1;
       if (dateA < dateB) return 1;
       return 0;
     });
@@ -44,16 +44,13 @@
         (album) => album.album_group === "album"
       );
 
-
       const albumsWithDetails = await getAlbumsDetails(
         onlyAlbums.map((a) => a.id)
       );
 
-      console.log(JSON.stringify(albumsWithDetails.slice(0, 1)));
+      const sortedAlbums = sortByReleaseDate(albumsWithDetails);
 
-      const sortedAlbums = sortByReleaseDate(albumsWithDetails)
-
-      albums = sortedAlbums
+      albums = sortedAlbums;
     }
   };
 
