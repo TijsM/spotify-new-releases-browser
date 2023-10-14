@@ -4,7 +4,7 @@
     getAlbumsFromArtists,
     getUserFavoriteArtists,
     getAlbumsDetails,
-    getAlbumsFromUser
+    getAlbumsFromUser,
   } from "../lib/fetchSpotify.js";
 
   import { sortByReleaseDate } from "../lib/sortByReleaseDate.js";
@@ -19,8 +19,21 @@
   let isDiscconnected = false;
   let userAlbums = [];
 
+  let firstAlbums = [];
+  let secondAlbums = [];
+  let restAlbums = [];
 
-  const INTERCEPT_LENGTH=10
+  $: {
+    if (albums.length > 0) {
+      firstAlbums = albums.slice(0, 10);
+    }
+    if (albums.length > 10) {
+      secondAlbums = albums.slice(10, 20);
+    }
+    if (albums.length > 20) {
+      restAlbums = albums.slice(20, albums.length);
+    }
+  }
 
   const fetchFavoriteArtists = async () => {
     const realFavArtists = await getUserFavoriteArtists();
@@ -64,7 +77,7 @@
   onMount(() => {
     scrollFullPage();
     fetchFavoriteArtists();
-    getUserAlbums()
+    getUserAlbums();
   });
 
   $: fetchAlbums(favoriteArtists);
@@ -73,11 +86,18 @@
 {#if isDiscconnected && localStorage.getItem("bearer-token")}
   <Authorize />
 {:else}
-  <VerticalList albums={albums?.slice(0*INTERCEPT_LENGTH, 1*INTERCEPT_LENGTH)} />
-  <OnGenre  title="Albums you might like based on your __genres__"  />
-  <VerticalList albums={albums?.slice(1*INTERCEPT_LENGTH, 2*INTERCEPT_LENGTH)} />
-  <OnFavoriteArtists title="Albums you might like based on the artists __you often listen to__" {userAlbums} />
-  <VerticalList albums={albums?.slice(2*INTERCEPT_LENGTH, albums?.length)} />
-
-  
+  <VerticalList
+    albums={firstAlbums}
+  />
+  <OnGenre title="Albums you might like based on your __genres__" />
+  <VerticalList
+    albums={secondAlbums}
+  />
+  <OnFavoriteArtists
+    title="Albums you might like based on the artists __you often listen to__"
+    {userAlbums}
+  />
+  <VerticalList
+  albums={restAlbums}
+/>
 {/if}
