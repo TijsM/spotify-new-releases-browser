@@ -6,29 +6,20 @@
     getUserFavoriteArtists,
     getAlbumsDetails,
   } from "../lib/fetchSpotify.js";
+
+  import { sortByReleaseDate } from "../lib/sortByReleaseDate.js";
   import { scrollFullPage } from "../lib/scroll";
   import Authorize from "./Authorize.svelte";
   import HorizontalList from "./HorizontalList.svelte";
 
   let favoriteArtists = [];
   let albums = [];
+  let isDiscconnected = false;
 
   const fetchFavoriteArtists = async () => {
     const realFavArtists = await getUserFavoriteArtists();
     favoriteArtists = realFavArtists;
   };
-
-  function sortByReleaseDate(albums) {
-    return albums.sort((a, b) => {
-      const dateA = new Date(a.release_date);
-      const dateB = new Date(b.release_date);
-
-      // Compare release dates
-      if (dateA > dateB) return -1;
-      if (dateA < dateB) return 1;
-      return 0;
-    });
-  }
 
   const fetchAlbums = async () => {
     if (favoriteArtists.length > 0) {
@@ -53,9 +44,6 @@
       albums = sortedAlbums;
     }
   };
-
-  let isDiscconnected = false;
-  
 
   onMount(() => {
     scrollFullPage();

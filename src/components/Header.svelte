@@ -1,6 +1,15 @@
 <script>
-  import {scrollFullPage} from '../lib/scroll'
+  import { scrollFullPage } from "../lib/scroll";
 </script>
+
+<div class="conversationalContainer">
+  <div class="conversationalHeader">Hi there!</div>
+  <div class="conversationalContent">
+    We will take a look at your saved artists and display all the recent released
+    Albumbs.
+    <button class="CTA" on:click={scrollFullPage}>Let's go →</button>
+  </div>
+</div>
 
 <style>
   .CTA {
@@ -12,12 +21,3 @@
     padding: 0px;
   }
 </style>
-
-<div class="conversationalContainer">
-  <div class="conversationalHeader">Hi there!</div>
-  <div class="conversationalContent">
-    By taking a look at your saved albums and your listening history we will
-    suggest some alternatives.
-    <button class="CTA" on:click={scrollFullPage}>Let's go →</button>
-  </div>
-</div>
