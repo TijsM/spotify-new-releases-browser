@@ -1,5 +1,4 @@
 <script>
-  import { onMount, afterUpdate } from "svelte";
   export let albumData;
 </script>
 

@@ -11,6 +11,7 @@
   import { scrollFullPage } from "../lib/scroll";
   import Authorize from "./Authorize.svelte";
   import HorizontalList from "./HorizontalList.svelte";
+  import VerticalList from "./VerticalList.svelte";
 
   let favoriteArtists = [];
   let albums = [];
@@ -56,5 +57,5 @@
 {#if isDiscconnected && localStorage.getItem("bearer-token")}
   <Authorize />
 {:else}
-  <HorizontalList title="test" {albums} />
+  <VerticalList  {albums} />
 {/if}
