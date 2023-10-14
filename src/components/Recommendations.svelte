@@ -35,6 +35,9 @@
     }
   }
 
+  $: fetchAlbums(favoriteArtists);
+
+
   const fetchFavoriteArtists = async () => {
     const realFavArtists = await getUserFavoriteArtists();
     favoriteArtists = realFavArtists;
@@ -63,6 +66,7 @@
       albums = sortedAlbums;
     }
   };
+
   const getUserAlbums = async () => {
     const _albums = await getAlbumsFromUser();
     if (_albums === null) {
@@ -72,7 +76,6 @@
     albumsLoaded = true;
   };
 
-  getUserAlbums();
 
   onMount(() => {
     scrollFullPage();
@@ -80,7 +83,6 @@
     getUserAlbums();
   });
 
-  $: fetchAlbums(favoriteArtists);
 </script>
 
 {#if isDiscconnected && localStorage.getItem("bearer-token")}
