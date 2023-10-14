@@ -1,21 +1,26 @@
 <script>
   import { onMount } from "svelte";
   import {
-    getFavoriteArtists,
     getAlbumsFromArtists,
     getUserFavoriteArtists,
     getAlbumsDetails,
+    getAlbumsFromUser
   } from "../lib/fetchSpotify.js";
 
   import { sortByReleaseDate } from "../lib/sortByReleaseDate.js";
   import { scrollFullPage } from "../lib/scroll";
   import Authorize from "./Authorize.svelte";
-  import HorizontalList from "./HorizontalList.svelte";
   import VerticalList from "./VerticalList.svelte";
+  import OnGenre from "../components/lists/OnGenre.svelte";
+  import OnFavoriteArtists from "../components/lists/OnFavoriteArtists.svelte";
 
   let favoriteArtists = [];
   let albums = [];
   let isDiscconnected = false;
+  let userAlbums = [];
+
+
+  const INTERCEPT_LENGTH=10
 
   const fetchFavoriteArtists = async () => {
     const realFavArtists = await getUserFavoriteArtists();
@@ -45,10 +50,21 @@
       albums = sortedAlbums;
     }
   };
+  const getUserAlbums = async () => {
+    const _albums = await getAlbumsFromUser();
+    if (_albums === null) {
+      isDiscconnected = true;
+    }
+    userAlbums = [..._albums];
+    albumsLoaded = true;
+  };
+
+  getUserAlbums();
 
   onMount(() => {
     scrollFullPage();
     fetchFavoriteArtists();
+    getUserAlbums()
   });
 
   $: fetchAlbums(favoriteArtists);
@@ -57,5 +73,11 @@
 {#if isDiscconnected && localStorage.getItem("bearer-token")}
   <Authorize />
 {:else}
-  <VerticalList  {albums} />
+  <VerticalList albums={albums?.slice(0*INTERCEPT_LENGTH, 1*INTERCEPT_LENGTH)} />
+  <OnGenre  title="Albums you might like based on your __genres__"  />
+  <VerticalList albums={albums?.slice(1*INTERCEPT_LENGTH, 2*INTERCEPT_LENGTH)} />
+  <OnFavoriteArtists title="Albums you might like based on the artists __you often listen to__" {userAlbums} />
+  <VerticalList albums={albums?.slice(2*INTERCEPT_LENGTH, albums?.length)} />
+
+  
 {/if}

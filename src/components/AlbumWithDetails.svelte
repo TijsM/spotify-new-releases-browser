@@ -29,6 +29,7 @@
   img {
     width: 50%;
     margin-bottom: 15px;
+    max-width: 300px;
   }
   .albumInfo {
     display: flex;
