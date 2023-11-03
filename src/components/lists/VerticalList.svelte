@@ -1,7 +1,7 @@
 <script>
   import HighlightedTitle from '../HighlightedTitle.svelte'
-  import Skeleton from "../albumWithDetails/AlbumWithDetails.loading.svelte"
-  import AlbumWithDetails from '../albumWithDetails/AlbumWithDetails.loading.svelte';
+  import HorizontalAlbumCardSkeleton from "../horizontalAlbumCard/HorizontalAlbumCard.loading.svelte"
+  import HorizontalAlbumCard from '../horizontalAlbumCard/HorizontalAlbumCard.svelte';
 
   export let title;
   export let albums;
@@ -13,11 +13,11 @@
   <div class="verticalList">
     {#if loading}
       {#each Array(10) as _}
-        <Skeleton />
+        <HorizontalAlbumCardSkeleton />
       {/each}
     {:else}
       {#each albums as album}
-        <AlbumWithDetails albumData={album} />
+        <HorizontalAlbumCard albumData={album} />
       {/each}
     {/if}
   </div>

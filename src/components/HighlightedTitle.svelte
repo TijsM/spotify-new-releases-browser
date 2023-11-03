@@ -12,7 +12,6 @@
     }, 1500);
   });
 
-  console.log(title)
 </script>
 
 <h2>
