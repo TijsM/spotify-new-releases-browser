@@ -91,6 +91,6 @@
 </script>
 
 <HorizontalList
-  title="Based on your _genres_"
+  title="Based on your genres"
   loadMore={getData}
   albums={selectedAlbums} />

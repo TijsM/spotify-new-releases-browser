@@ -13,6 +13,7 @@
   import VerticalList from "./lists/VerticalList.svelte";
   import OnGenre from "./collections/OnGenre.svelte";
   import OnFavoriteArtists from "./collections/OnFavoriteArtists.svelte";
+  import HighlightedTitle from "./HighlightedTitle.svelte";
 
   let favoriteArtists = [];
   let albums = [];
@@ -87,11 +88,13 @@
 {#if isDiscconnected && localStorage.getItem("bearer-token")}
   <Authorize />
 {:else}
+  <HighlightedTitle title="The latests albums from your saved artists" />
+
   <VerticalList {loading} albums={firstAlbums} />
-  <OnGenre title="Albums you might like based on your __genres__" />
+  <OnGenre title="Albums you might like based on your genres" />
   <VerticalList {loading} albums={secondAlbums} />
   <OnFavoriteArtists
-    title="Albums you might like based on the artists __you often listen to__"
+    title="Albums you might like based on the artists you often listen to"
     {userAlbums}
   />
   <VerticalList {loading} albums={restAlbums} />

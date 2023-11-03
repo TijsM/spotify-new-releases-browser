@@ -1,5 +1,5 @@
 <script>
-  import AlbumWithDetails from "../AlbumWithDetails.svelte";
+  import AlbumWithDetails from "../albumWithDetails/AlbumWithDetails.svelte";
   import HighlightedTitle from "../HighlightedTitle.svelte";
   import Skeleton from "../albumWithDetails/AlbumWithDetails.loading.svelte";
 

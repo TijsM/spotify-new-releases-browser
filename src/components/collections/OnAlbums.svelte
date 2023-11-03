@@ -55,6 +55,6 @@
 </script>
 
 <HorizontalList
-  title="Based on your _saved albums_"
+  title="Based on your saved albums"
   loadMore={loadAlbums}
   albums={randomSelectionOfAlbums} />
