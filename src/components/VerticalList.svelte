@@ -1,17 +1,25 @@
 <script>
   import AlbumWithDetails from "./AlbumWithDetails.svelte";
   import HighlightedTitle from "./HighlightedTitle.svelte";
+  import Skeleton from "./AlbumWithDetails.loading.svelte";
 
   export let title;
   export let albums;
+  export let loading;
 </script>
 
 <section>
   {#if title} <HighlightedTitle {title} /> {/if}
   <div class="verticalList">
-    {#each albums as album}
-      <AlbumWithDetails albumData={album} />
-    {/each}
+    {#if loading}
+      {#each Array(10) as _}
+        <Skeleton />
+      {/each}
+    {:else}
+      {#each albums as album}
+        <AlbumWithDetails albumData={album} />
+      {/each}
+    {/if}
   </div>
 </section>
 

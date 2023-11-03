@@ -1,7 +1,6 @@
 <script>
   export let albumData;
 
-  console.log(albumData);
 </script>
 
 {#if albumData}

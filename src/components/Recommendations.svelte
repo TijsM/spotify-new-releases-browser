@@ -18,6 +18,7 @@
   let albums = [];
   let isDiscconnected = false;
   let userAlbums = [];
+  let loading = true;
 
   let firstAlbums = [];
   let secondAlbums = [];
@@ -25,6 +26,7 @@
 
   $: {
     if (albums.length > 0) {
+      loading = false;
       firstAlbums = albums.slice(0, 10);
     }
     if (albums.length > 10) {
@@ -36,7 +38,6 @@
   }
 
   $: fetchAlbums(favoriteArtists);
-
 
   const fetchFavoriteArtists = async () => {
     const realFavArtists = await getUserFavoriteArtists();
@@ -76,30 +77,22 @@
     albumsLoaded = true;
   };
 
-
   onMount(() => {
     scrollFullPage();
     fetchFavoriteArtists();
     getUserAlbums();
   });
-
 </script>
 
 {#if isDiscconnected && localStorage.getItem("bearer-token")}
   <Authorize />
 {:else}
-  <VerticalList
-    albums={firstAlbums}
-  />
+  <VerticalList {loading} albums={firstAlbums} />
   <OnGenre title="Albums you might like based on your __genres__" />
-  <VerticalList
-    albums={secondAlbums}
-  />
+  <VerticalList {loading} albums={secondAlbums} />
   <OnFavoriteArtists
     title="Albums you might like based on the artists __you often listen to__"
     {userAlbums}
   />
-  <VerticalList
-  albums={restAlbums}
-/>
+  <VerticalList {loading} albums={restAlbums} />
 {/if}
