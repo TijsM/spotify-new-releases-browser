@@ -2,7 +2,7 @@
   import { getFavoriteArtists, getAlbumsFromArtist } from "../../lib/fetchSpotify.js";
   import { AMOUNT_OF_ALBUMS_TO_FETCH } from '../../constants.js'
   import { getRandom } from "../../lib/getRandom.js";
-  import HorizontalList from '../lists/HorizontalList.svelte'
+  import HorizontalList from '../list/HorizontalList.svelte'
 
   export let title
   export let period

@@ -1,6 +1,6 @@
 <script>
-  import Album from "../album/Album.svelte";
-  import LoadAlbum from "../album/AlbumLoading.svelte";
+  import Album from "../album-card/Album.svelte";
+  import LoadAlbum from "../album-card/AlbumLoading.svelte";
   import LoadMore from "./LoadMore.svelte";
   import HighlightedTitle from "../HighlightedTitle.svelte";
   import { AMOUNT_OF_ALBUMS_TO_FETCH } from "../../constants.js";

@@ -5,7 +5,7 @@
   } from "../../lib/fetchSpotify";
   import { AMOUNT_OF_ALBUMS_TO_FETCH } from "../../constants.js";
   import { getRandom } from "../../lib/getRandom.js";
-  import HorizontalList from "../lists/HorizontalList.svelte";
+  import HorizontalList from "../list/HorizontalList.svelte";
 
   let favoriteArtists = [];
   let selectedAlbums = [];

@@ -1,7 +1,7 @@
 <script>
   import HighlightedTitle from '../HighlightedTitle.svelte'
-  import HorizontalAlbumCardSkeleton from "../horizontalAlbumCard/HorizontalAlbumCard.loading.svelte"
-  import HorizontalAlbumCard from '../horizontalAlbumCard/HorizontalAlbumCard.svelte';
+  import HorizontalAlbumCardSkeleton from "../album-card-horizontal/HorizontalAlbumCard.loading.svelte"
+  import HorizontalAlbumCard from '../album-card-horizontal/HorizontalAlbumCard.svelte';
 
   export let title;
   export let albums;
