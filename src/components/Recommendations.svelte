@@ -10,9 +10,9 @@
   import { sortByReleaseDate } from "../lib/sortByReleaseDate.js";
   import { scrollFullPage } from "../lib/scroll";
   import Authorize from "./Authorize.svelte";
-  import VerticalList from "./VerticalList.svelte";
-  import OnGenre from "../components/lists/OnGenre.svelte";
-  import OnFavoriteArtists from "../components/lists/OnFavoriteArtists.svelte";
+  import VerticalList from "./lists/VerticalList.svelte";
+  import OnGenre from "./collections/OnGenre.svelte";
+  import OnFavoriteArtists from "./collections/OnFavoriteArtists.svelte";
 
   let favoriteArtists = [];
   let albums = [];

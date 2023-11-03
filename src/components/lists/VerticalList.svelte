@@ -1,7 +1,7 @@
 <script>
-  import AlbumWithDetails from "./AlbumWithDetails.svelte";
-  import HighlightedTitle from "./HighlightedTitle.svelte";
-  import Skeleton from "./AlbumWithDetails.loading.svelte";
+  import AlbumWithDetails from "../AlbumWithDetails.svelte";
+  import HighlightedTitle from "../HighlightedTitle.svelte";
+  import Skeleton from "../AlbumWithDetails/AlbumWithDetails.loading.svelte";
 
   export let title;
   export let albums;

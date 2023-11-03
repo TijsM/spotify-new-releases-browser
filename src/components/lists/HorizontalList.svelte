@@ -1,9 +1,9 @@
 <script>
-  import Album from "./Album.svelte";
-  import LoadAlbum from "./AlbumLoading.svelte";
+  import Album from "../Album/Album.svelte";
+  import LoadAlbum from "../AlbumLoading.svelte";
   import LoadMore from "./LoadMore.svelte";
-  import HighlightedTitle from "./HighlightedTitle.svelte";
-  import { AMOUNT_OF_ALBUMS_TO_FETCH } from "../constants.js";
+  import HighlightedTitle from "../HighlightedTitle.svelte";
+  import { AMOUNT_OF_ALBUMS_TO_FETCH } from "../../constants.js";
 
   export let title;
   export let albums;
