@@ -89,9 +89,8 @@
   <Authorize />
 {:else}
   <HighlightedTitle title="The latests albums from your saved artists" />
-
   <VerticalList {loading} albums={firstAlbums} />
-  <OnGenre title="Albums you might like based on your genres" />
+  <OnGenre title="Albums you might like based on your favorite genres" />
   <VerticalList {loading} albums={secondAlbums} />
   <OnFavoriteArtists
     title="Albums you might like based on the artists you often listen to"
