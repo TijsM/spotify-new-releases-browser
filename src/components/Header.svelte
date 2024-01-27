@@ -6,7 +6,7 @@
   <div class="conversationalHeader">Hi there!</div>
   <div class="conversationalContent">
     We will take a look at your saved artists and display all the recent released
-    Albumbs.
+    albums.
     <button class="CTA" on:click={scrollFullPage}>Let's go →</button>
   </div>
 </div>
